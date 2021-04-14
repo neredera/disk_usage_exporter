@@ -15,8 +15,9 @@ RUN go build \
     -o disk_usage_exporter \
     cmd/root.go
 
-FROM scratch
+FROM alpine:latest
 COPY --from=build /go/src/app/disk_usage_exporter /
+RUN chmod +x ./disk_usage_exporter
 
 EXPOSE 9995
 ENTRYPOINT [ "/disk_usage_exporter" ]
