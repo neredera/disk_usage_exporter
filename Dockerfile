@@ -12,8 +12,7 @@ RUN go build \
     -a \
     -tags netgo \
     -ldflags '-w -extldflags "-static"' \
-    -o disk_usage_exporter \
-    cmd/root.go
+    -o disk_usage_exporter
 
 FROM alpine:latest
 COPY --from=build /go/src/app/disk_usage_exporter /
