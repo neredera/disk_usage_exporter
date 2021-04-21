@@ -3,7 +3,18 @@ type: docker
 name: default
 
 steps:
-- name: build
+- name: build-dockerhub
+  image: plugins/docker
+  settings:
+    repo: neredera/disk_usage-exporter
+    tags:
+      - latest
+    username:
+      from_secret: dockerhub_user
+    password:
+      from_secret: dockerhub_password
+
+- name: build-nere-int
   image: plugins/docker
 #  image: nere.dev/d-hub/plugins/docker:latest
   settings:
@@ -12,3 +23,4 @@ steps:
     registry: nere.dev/d-int
     tags:
       - latest
+
